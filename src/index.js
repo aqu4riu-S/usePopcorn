@@ -1,17 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useCallback } from "react";
+import ReactDOM from "react-dom/client";
+//import "./index.css";
+//import App from "./App";
+import StarRating from "./StarRating";
+import { useState } from "react";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+function ShowRating() {
+  const [rating, setRating] = useState(0);
+  const maxRating = 6;
+
+  return (
+    <div>
+      <StarRating
+        color="black"
+        size={20}
+        maxRating={maxRating}
+        onSetRating={setRating}
+      />
+      <p>
+        You rated this movie {rating} out of {maxRating} stars.
+      </p>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <StarRating
+      maxRating={5}
+      messages={["Terrible", "Bad", "Meh", "Good", "Amazing"]}
+    />
+    <StarRating maxRating={10} />
+    <StarRating maxRating={8} color="#1db954" size={40} defaultRating={3} />
+
+    <ShowRating />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
